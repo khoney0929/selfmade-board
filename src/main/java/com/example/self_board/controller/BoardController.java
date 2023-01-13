@@ -1,16 +1,17 @@
 package com.example.self_board.controller;
 
+import com.example.self_board.rpository.Board;
+import com.example.self_board.service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class BoardController {
+
+    @Autowired
+    private BoardService boardService;
 
     //메인화면
     @GetMapping("/")
@@ -28,10 +29,9 @@ public class BoardController {
 
     //글쓰기 데이터
     @PostMapping("/board/writeprocess")
-    public String boardWriteProcess(String title,String content){
+    public String boardWritePro(Board board){
 
-        System.out.println(title + content);
-
+        boardService.writeProcess(board);
 
 
         return "";

@@ -5,6 +5,8 @@ import com.example.self_board.rpository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class BoardService {
@@ -15,9 +17,13 @@ public class BoardService {
 
 
     public void writeProcess(Board board){
-
         boardRepository.save(board);
 
+    }
+
+    public List<Board> listView(){
+
+        return boardRepository.findAll();
     }
 
 

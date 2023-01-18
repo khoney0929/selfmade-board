@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -32,6 +33,12 @@ public class BoardService {
         return boardRepository.findById(id).get();
     }
 
+    //게시글 삭제
+    public void boardDelete(Integer id){
+
+        boardRepository.deleteById(id);
+
+    }
 
 
 }

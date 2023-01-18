@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -49,10 +50,42 @@ public class BoardController {
     //게시글 상세페이지
     @GetMapping("/board/boarddetailview")
     public String boarddetailview(Model model, Integer id){
+
         model.addAttribute("board",boardService.boardDetailView(id));
 
         return "boarddetailview";
     }
 
+    @GetMapping("/board/boarddelete")
+    public String boardDelete(Integer id){
+
+        boardService.boardDelete(id);
+
+        return "redirect:/board/boardlist";
+    }
+
+    //수정버튼클릭시 id값에 맞는 제목과 내용 불러오기
+    @GetMapping("/board/boardmodify/{id}")
+    public String boardModify(@PathVariable("id") Integer id, Model model){
+
+        model.addAttribute("board", boardService.boardDetailView(id));
+
+
+        return "boardmodify";
+    }
+
+    //수정된내용으로 덮어쓰기
+    @PostMapping("/board/update/{id}")
+    public String boardUpdate(@PathVariable("id") Integer id, Board board){
+
+        Board boardTemp = boardService.boardDetailView(id);
+        boardTemp.setTitle(board.getTitle());
+        boardTemp.setContent(board.getContent());
+
+        boardService.writeProcess(boardTemp);
+
+        return "redirect:/board/boardlist";
+
+    }
 
 }

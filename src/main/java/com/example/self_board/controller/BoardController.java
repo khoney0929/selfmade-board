@@ -34,16 +34,24 @@ public class BoardController {
 
         boardService.writeProcess(board);
 
-        return "";
+        return "redirect:/";
     }
 
-
+    //게시글 목록
     @GetMapping("/board/boardlist")
     public String boardList(Model model){
 
         model.addAttribute("list", boardService.listView());
 
         return "boardlist";
+    }
+
+    //게시글 상세페이지
+    @GetMapping("/board/boarddetailview")
+    public String boarddetailview(Model model, Integer id){
+        model.addAttribute("board",boardService.boardDetailView(id));
+
+        return "boarddetailview";
     }
 
 

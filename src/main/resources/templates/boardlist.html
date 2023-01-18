@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>게시글 목록</title>
 </head>
 <body>
 <div class = "layout">
@@ -16,7 +16,7 @@
     <tbody>
       <tr th:each="board : ${list}">
         <td th:text="${board.id}">1</td>
-        <td th:text="${board.title}">제목</td>
+        <td><a th:text="${board.title}" th:href="@{/board/boarddetailview(id=${board.id})}">제목</a></td>
       </tr>
     </tbody>
   </table>

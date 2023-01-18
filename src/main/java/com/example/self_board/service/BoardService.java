@@ -14,16 +14,22 @@ public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
 
-
-
+    //글작성
     public void writeProcess(Board board){
         boardRepository.save(board);
 
     }
 
+    //게시글목록
     public List<Board> listView(){
 
         return boardRepository.findAll();
+    }
+
+    //게시글 상세 페이지보기
+    public Board boardDetailView(Integer id){
+
+        return boardRepository.findById(id).get();
     }
 
 
